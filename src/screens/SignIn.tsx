@@ -11,17 +11,19 @@ import {Input} from "@components/Input";
 import {Button} from "@components/Button";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {FormDataProps} from "src/@types/global";
+import {SignInProps} from "src/@types/global";
 import {signInSchema} from "@helpers/formsSchema/signinSchema";
 import LogoSvg from "@assets/logo.svg";
 import BrandSvg from "@assets/brand.svg";
+import {useNavigation} from "@react-navigation/native";
 
 export const SignIn = () => {
+  const navigation = useNavigation();
   const {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm<FormDataProps>({
+  } = useForm<SignInProps>({
     defaultValues: {
       email: "",
       password: "",
@@ -29,21 +31,21 @@ export const SignIn = () => {
     resolver: yupResolver(signInSchema),
   });
 
+  const handleNewAccount = () => {
+    navigation.navigate("signUp");
+  };
+
+  const handleSignIn = () => {
+    console.log('logou');
+  }
+
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       showsVerticalScrollIndicator={false}
     >
       <VStack flex={1} justifyContent="space-between">
-        <Box bg="gray.600" px={10} pb={20} roundedBottom={24} >
-          <Image
-            // source={BackgroundImg}
-            // defaultSource={BackgroundImg}
-            alt="Pessoas treinando"
-            resizeMode="contain"
-            position="absolute"
-          />
-
+        <Box bg="gray.600" px={10} pb={20} roundedBottom={24}>
           <Center my={24}>
             <LogoSvg />
 
@@ -91,14 +93,14 @@ export const SignIn = () => {
 
             <Button
               title="Entrar"
-              // onPress={handleSubmit(handleSignIn)}
+              onPress={handleSubmit(handleSignIn)}
               // isLoading={isLoading}
               mt={5}
             />
           </Center>
         </Box>
 
-        <Box px={10} pb={24}>
+        <Box px={10} pb={16}>
           <Center mt={12}>
             <Text color="gray.200" fontSize="sm" mb={3} fontFamily="body">
               Ainda não tem acesso?
@@ -109,7 +111,7 @@ export const SignIn = () => {
             title="Criar uma conta"
             mt={2}
             color="gray"
-            // onPress={handleNewAccount}
+            onPress={handleNewAccount}
           />
         </Box>
       </VStack>
