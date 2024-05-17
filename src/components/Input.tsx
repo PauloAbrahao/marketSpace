@@ -51,7 +51,7 @@ export function Input({errorMessage = null, isInvalid, secureTextEntry = false, 
         {...rest}
       />
 
-      <FormControl.ErrorMessage mt={-2} mb={4} _text={{color: "red.500"}}>
+      <FormControl.ErrorMessage mt={-3} mb={3} _text={{color: "red.500"}}>
         {errorMessage}
       </FormControl.ErrorMessage>
     </FormControl>
