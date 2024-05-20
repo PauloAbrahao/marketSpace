@@ -10,3 +10,8 @@ export type SignUpProps = {
   password: string;
   confirm_password: string;
 };
+
+export type IconButtonProps = {
+  onPress: () => void;
+  color: string;
+};
